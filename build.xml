@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+  <project name="Verge" default="build">
+
+  <property name="src.dir" value="src"/>
+  <property name="webcontent.dir" value="webcontent"/>
+  <property name="web.dir" value="output"/>
+  <property name="build.dir" value="${web.dir}/WEB-INF/classes"/>
+  <property name="ure.dir" value="/opt/libreoffice4.0/ure/share/java"/>
+  <property name="uno.dir" value="/opt/libreoffice4.0/program"/>
+
+  <path id="master-classpath">
+      <fileset dir="${webcontent.dir}/WEB-INF/lib">
+          <include name="*.jar"/>
+      </fileset>
+      <fileset dir="${ure.dir}">
+          <include name="ridl.jar"/>
+          <include name="jurt.jar"/>
+      </fileset>
+      <fileset dir="${uno.dir}/classes">
+         <include name="unoil.jar"/>
+      </fileset>
+      <fileset dir="${uno.dir}">
+          <include name="juh.jar"/>
+      </fileset>
+      <pathelement path="${build.dir}"/>
+  </path>
+
+  <target name="compile" description="Compile source tree">
+    <mkdir dir="${web.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <javac destdir="${build.dir}" source="1.7" target="1.7">
+       <src path="${src.dir}"/>
+       <classpath refid="master-classpath"/>
+    </javac>
+  </target>
+  
+  <target name="build-war" depends="compile">
+    <war destfile="dist/verge.war" webxml="${webcontent.dir}/WEB-INF/web.xml">
+     <lib dir="${webcontent.dir}/WEB-INF/lib">
+       <exclude name="servlet-api-3.0.jar"/>
+     </lib>
+     <classes dir="${build.dir}"/>
+  </war>
+</target>
+
+    <target name="clean" description="Clean output directories">
+        <delete>
+            <fileset dir="${build.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="build" depends="build-war"/>
+
+</project>
+
