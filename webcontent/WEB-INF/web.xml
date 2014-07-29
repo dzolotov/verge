@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <servlet>
+    <servlet-name>Retriever</servlet-name>
+    <servlet-class>org.gathe.verge.pdf.Retriever</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Writer</servlet-name>
+    <servlet-class>org.gathe.verge.pdf.Writer</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Status</servlet-name>
+    <servlet-class>org.gathe.verge.pdf.Status</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Retriever</servlet-name>
+    <url-pattern>/Retriever</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Writer</servlet-name>
+    <url-pattern>/Writer</url-pattern>
+  </servlet-mapping>  
+  <servlet-mapping>
+    <servlet-name>Status</servlet-name>
+    <url-pattern>/Status</url-pattern>
+  </servlet-mapping>
+</web-app>
